@@ -12,7 +12,7 @@ int main()
     cout << "type: " << "- value "<< "- decimal" << "- mayan" << endl;
     for(int i = 0; i < (int) decimal.size(); i++)
     {
-        /*try
+        try
         {
             uint2mayan(decimal[i]);
         }
@@ -25,8 +25,8 @@ int main()
         }
         catch (const runtime_error& ex) {
             cerr << ex.what() << " in mayan2uint at " << decimal[i] << " - " << mayan[i] << endl;
-        };*/
-
+        };
+        /*
         if(uint2mayan(decimal[i]) != mayan[i])
         {
             cout << "uint2mayan: " << uint2mayan(decimal[i]) << " - " << decimal[i] << " - " << mayan[i] << endl;
@@ -35,7 +35,7 @@ int main()
         {
             cout << "mayan2uint: " << mayan2uint(mayan[i]) << " - " << decimal[i] << " - " << mayan[i] << endl;
         };
-
+        */
     };
     vector<unsigned int>decimal_d = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 4294967295, 66};
     vector<char>mayan_d = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '`', '@', '/'};

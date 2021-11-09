@@ -5,16 +5,16 @@
 #include <cmath>
 
 
-void is_uint_sum_overflow(unsigned int a, unsigned int b, const std::string& ex_message)
+void is_uint_sum_overflowed(unsigned int a, unsigned int b, const std::string& ex_message)
 {
     if(a > std::numeric_limits<unsigned int>::max() - b)
         throw std::runtime_error(ex_message);
 }
 
 
-void is_too_many_mayan_digits(int mayan_length, const std::string& ex_message)
+void has_too_many_mayan_digits(int mayan_length, const std::string& ex_message)
 {
-    if(mayan_length > log(std::numeric_limits<unsigned int>::max())/std::log(mayan_base) + 1)
+    if(mayan_length > log(std::numeric_limits<unsigned int>::max()) / std::log(mayan_base) + 1)
         throw std::runtime_error(ex_message);
 }
 
@@ -45,7 +45,7 @@ unsigned int mayan2uint(const std::string& mayan_digits)
 {
     int mayan_length = mayan_digits.size();
 
-    is_too_many_mayan_digits(mayan_length, "<mayan2uint>: Mayan Value too large!");
+    has_too_many_mayan_digits(mayan_length, "<mayan2uint>: Mayan Value too large!");
 
     char mayan_digit;
     int mayan_digit_value;
@@ -58,7 +58,7 @@ unsigned int mayan2uint(const std::string& mayan_digits)
         mayan_digit_value = md2uint(mayan_digit);
         partial_uint_value = mayan_digit_value * pow(mayan_base, mayan_length - i - 1);
 
-        is_uint_sum_overflow(uint_value, partial_uint_value, "<mayan2uint>: Mayan Value too large!");
+        is_uint_sum_overflowed(uint_value, partial_uint_value, "<mayan2uint>: Mayan Value too large!");
 
         uint_value += partial_uint_value;
     };

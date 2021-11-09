@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1636494185 source:c:\github\jitp\zad_c6\mayan.cpp
+1636496307 source:c:\github\jitp\zad_c6\mayan.cpp
 	"mayan.h"
 	<limits>
 	<stdexcept>
@@ -8,7 +8,7 @@
 1635336724 c:\github\jitp\zad_c6\duodecimal.h
 	<string>
 
-1636493791 source:c:\github\jitp\zad_c6\zad_c6.cpp
+1636496355 source:c:\github\jitp\zad_c6\zad_c6.cpp
 	"mayan.h"
 	<string>
 	<vector>
