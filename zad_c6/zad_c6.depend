@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1636494185 source:c:\github\jitp\zad_c6\mayan.cpp
+	"mayan.h"
+	<limits>
+	<stdexcept>
+	<cmath>
+
+1635336724 c:\github\jitp\zad_c6\duodecimal.h
+	<string>
+
+1636493791 source:c:\github\jitp\zad_c6\zad_c6.cpp
+	"mayan.h"
+	<string>
+	<vector>
+	<fstream>
+	<iostream>
+
+1635959822 c:\github\jitp\zad_c6\mayan.h
+	<string>
+

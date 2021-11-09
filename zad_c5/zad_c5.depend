@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1635980364 source:c:\github\jitp\zad_c5\duodecimal.cpp
+	"duodecimal.h"
+	<cmath>
+
+1635336724 c:\github\jitp\zad_c5\duodecimal.h
+	<string>
+
+1635980286 source:c:\github\jitp\zad_c5\main.cpp
+	"duodecimal.h"
+	<string>
+	<vector>
+	<fstream>
+	<iostream>
+
