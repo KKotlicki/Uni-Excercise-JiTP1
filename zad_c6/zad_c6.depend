@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1636496307 source:c:\github\jitp\zad_c6\mayan.cpp
+1636496946 source:c:\github\jitp\zad_c6\mayan.cpp
 	"mayan.h"
 	<limits>
 	<stdexcept>

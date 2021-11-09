@@ -14,7 +14,7 @@ void is_uint_sum_overflowed(unsigned int a, unsigned int b, const std::string& e
 
 void has_too_many_mayan_digits(int mayan_length, const std::string& ex_message)
 {
-    if(mayan_length > log(std::numeric_limits<unsigned int>::max()) / std::log(mayan_base) + 1)
+    if(mayan_length > log(std::numeric_limits<unsigned int>::max()) / log(mayan_base) + 1)
         throw std::runtime_error(ex_message);
 }
 
