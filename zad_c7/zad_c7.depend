@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1637166424 source:c:\github\jitp\zad_c7\simpledate.cpp
+	"simpleDate.h"
+	<iostream>
+	<string>
+	<set>
+
+1637181995 c:\github\jitp\zad_c7\simpledate.h
+
+1637182337 source:c:\github\jitp\zad_c7\test.cpp
+	"simpleDate.h"
+	<iostream>
+
