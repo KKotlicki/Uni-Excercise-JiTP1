@@ -13,6 +13,20 @@ ostream& operator<<(ostream& os, const vector<int>& src)
 
 int main()
 {
+//    gi_date test_object1(1, 12, 2019);
+//    cout << test_object1.days_since_start << endl;
+//    cout << test_object1.get_day() << " " << test_object1.get_month() << " " << test_object1.get_year() << endl;
+//    test_object1.next_day();
+//    cout << test_object1.get_day() << " " << test_object1.get_month() << " " << test_object1.get_year() << endl;
+//
+//    gi_date test_object2(13, 1, 2019);
+//    cout << test_object2.days_since_start << endl;
+//    cout << test_object2.get_day() << " " << test_object2.get_month() << " " << test_object2.get_year() << endl;
+//    test_object2.prev_day();
+//    cout << test_object2.get_day() << " " << test_object2.get_month() << " " << test_object2.get_year() << endl;
+//
+//    cout << test_object1 - test_object2<< endl;
+
     int totalErrors = 0;
 
     // constructor exceptions tests

@@ -1,3 +1,4 @@
+// Konrad Kotlicki (310958)
 #include "gidate.h"
 #include <iomanip>
 using namespace std;
@@ -9,79 +10,78 @@ gi_date::gi_date(int day, int month, int year)
 {
     if (!is_valid(day, month, year))
         throw invalid_argument("Invalid date in gi_date::gi_date().");
-    gi_date::day = day;
-    gi_date::month = month;
-    gi_date::year = year;
+    if(year == 2019)
+        days_since_start = 0;
+    else if(year == 2020)
+        days_since_start = 365;
+    else
+        days_since_start = 731;
+    for(int i = 1; i < month; i++)
+        days_since_start += days_in_month(i, year);
+    days_since_start += day - 1;
 }
+
 
 int gi_date::get_year() const
 {
-    return year;
+    int days_since_current_year = days_since_start;
+    int current_year = 2019;
+
+    while(days_since_current_year + 1 > days_in_year(current_year))
+        days_since_current_year -= days_in_year(current_year++);
+
+    return current_year;
 }
 
 int gi_date::get_month() const
 {
-    return month;
+    int days_since_current_date = days_since_start;
+    int current_year = 2019;
+    int current_month = 1;
+
+    while(days_since_current_date + 1 > days_in_year(current_year))
+        days_since_current_date -= days_in_year(current_year++);
+
+    while(days_since_current_date + 1 > days_in_month(current_month, current_year))
+        days_since_current_date -= days_in_month(current_month++, current_year);
+
+    return current_month;
 }
 
 int gi_date::get_day() const
 {
-    return day;
+        int days_since_current_date = days_since_start;
+    int current_year = 2019;
+    int current_month = 1;
+
+    while(days_since_current_date + 1 > days_in_year(current_year))
+        days_since_current_date -= days_in_year(current_year++);
+
+    while(days_since_current_date + 1 > days_in_month(current_month, current_year))
+        days_since_current_date -= days_in_month(current_month++, current_year);
+
+    return days_since_current_date + 1;
 }
 
 void gi_date::next_day()
 {
-    if (++day > days_in_month(month, year))
-    {
-        day = 1;
-        if (++month > 12)
-        {
-            month = 1;
-            if (++year > 2021)
-            {
-                year = 2021;
-                month = 12;
-                day = days_in_month(month, year);
-            }
-        }
-    }
+    if(days_since_start != max_day)
+        days_since_start++;
 }
 
 void gi_date::prev_day()
 {
-    if (--day < 1)
-    {
-        if (--month < 1)
-        {
-            if (--year < 2019)
-            {
-                day = 1;
-                month = 1;
-                year = 2019;
-            }
-            else
-            {
-                month = 12;
-                day = days_in_month(month, year);
-            }
-        }
-        else
-            day = days_in_month(month, year);
-    }
+    if(days_since_start != 0)
+        days_since_start--;
 }
 
 gi_date& gi_date::operator+=(int days)
 {
-    while (days > 0 && *this != gi_date(31, 12, 2021))
-    {
-        next_day();
-        --days;
-    }
-    while (days < 0 && *this != gi_date(1, 1, 2019))
-    {
-        prev_day();
-        ++days;
-    }
+    if(days_since_start <= -days)
+       days_since_start = 0;
+    else if(days_since_start + days >= max_day)
+        days_since_start = max_day;
+    else days_since_start += days;
     return *this;
 }
 
@@ -115,11 +115,20 @@ int gi_date::days_in_month(int month, int year)
     return 0;
 }
 
+int gi_date::days_in_year(int year)
+{
+    if(year == 2019)
+        return 365;
+    if(year == 2020)
+        return 366;
+    if(year == 2021)
+        return 365;
+    return 0;
+}
+
 bool operator==(const gi_date& left, const gi_date& right)
 {
-    return left.get_year() == right.get_year() &&
-            left.get_month() == right.get_month() &&
-            left.get_day() == right.get_day();
+    return left.diff(right) == 0;
 }
 
 bool operator!=(const gi_date& left, const gi_date& right)
@@ -129,36 +138,24 @@ bool operator!=(const gi_date& left, const gi_date& right)
 
 bool operator<(const gi_date& left, const gi_date& right)
 {
-    if (left.get_year() < right.get_year())
-        return true;
-    else if (left.get_year() == right.get_year())
-    {
-        if (left.get_month() < right.get_month())
-            return true;
-        else if (left.get_month() == right.get_month())
-            return left.get_day() < right.get_day();
-    }
-    return false;
+    return left.diff(right) < 0;
 }
+
 int operator-(const gi_date& left, const gi_date& right)
 {
-    int diff = 0;
-    if (left < right)
-    {
-        for (gi_date cpy(left); cpy != right; cpy.next_day())
-            --diff;
-    }
-    if (right < left)
-    {
-        for (gi_date cpy(left); cpy != right; cpy.prev_day())
-            ++diff;
-    }
+    int diff = left.diff(right);
     return diff;
 }
 
 std::ostream& operator<<(std::ostream& os, const gi_date& right)
 {
-    os << right.get_year() << '-' << setfill('0') << setw(2)
-        << right.get_month() << '-' << right.get_day();
+    os << right.get_year()
+     << '-' << setfill('0') << setw(2)<< right.get_month()
+     << '-'<< setfill('0') << setw(2) << right.get_day();
     return os;
+}
+
+int gi_date::diff(const gi_date& right) const
+{
+    return days_since_start - right.days_since_start;
 }
