@@ -1,6 +1,5 @@
 // Konrad Kotlicki (310958)
-//#include <iostream>
-#include <sstream>
+#include <iostream>
 #pragma once
 class fraction
 {

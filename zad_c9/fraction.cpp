@@ -1,7 +1,6 @@
 // Konrad Kotlicki (310958)
 #include "fraction.h"
 #include <cmath>
-using namespace std;
 
 int gcd(int m, int n)
 {
