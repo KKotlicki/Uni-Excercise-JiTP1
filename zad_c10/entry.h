@@ -2,6 +2,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <limits>
+#include <stdexcept>
 
 class entry
 {
@@ -25,6 +27,7 @@ public:
 
     entry operator++(int)
     {
+        if(cnt == INT_MAX) throw overflow_error("Object count overflow (must be in integer range)");
         entry retv(*this);
         cnt++;
         return retv;
