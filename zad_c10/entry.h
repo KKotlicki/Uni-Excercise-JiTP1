@@ -42,14 +42,14 @@ public:
         return os;
     }
 
-    friend operator>>(std::istream& is, entry& right)
+    friend std::istream& operator>>(std::istream& is, entry& right)
     {
         std::string val;
         int cnt;
         is >> val >> cnt;
         right.val = val;
         right.cnt = cnt;
-        return 1;
+        return is;
     }
 
 private:
