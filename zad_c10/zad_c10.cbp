@@ -33,7 +33,7 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="entry.h" />
-		<Unit filename="zad_c10.cpp" />
+		<Unit filename="entry_test.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
