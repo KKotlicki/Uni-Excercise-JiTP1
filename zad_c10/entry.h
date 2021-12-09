@@ -25,33 +25,29 @@ public:
         return cnt;
     }
 
-    entry operator++(int)
+    operator++(int)
     {
-        if(cnt == INT_MAX) throw overflow_error("Object count overflow (must be in integer range)");
-        entry retv(*this);
-        cnt++;
-        return retv;
+        if(cnt == INT_MAX) throw std::overflow_error("Object count overflow (must be in integer range).");
+        return cnt++;
     }
 
-    bool operator<(const entry& right) const
+    bool operator<(const entry& rhf) const
     {
-        entry tmp_obj = *this;
-        return *tmp_obj < *right;
+        return val < rhf.val;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const entry& right)
+    friend std::ostream& operator<<(std::ostream& os, const entry& rhf)
     {
-        os << "[" << *right << " " << (int) right << "]";
+        os << "[" << *rhf << " " << (int) rhf << "]";
         return os;
     }
 
-    friend std::istream& operator>>(std::istream& is, entry& right)
+    friend std::istream& operator>>(std::istream& is, entry& rhf)
     {
-        std::string val;
-        int cnt;
-        is >> val >> cnt;
-        right.val = val;
-        right.cnt = cnt;
+        char start = '*', stop = '*';
+        is >> start >> rhf.val >> rhf.cnt >> stop;
+        if (start != '[' || stop != ']')
+            throw std::invalid_argument("Invalid entry on input stream.");
         return is;
     }
 

@@ -26,8 +26,9 @@ int main()
     }
 
     // operator++ test
-    entry tst2 = tst1++;
-    if ((int)tst1 != (int)tst2 + 1)
+    entry tst2 = tst1;
+    int cnt = tst1++;
+    if ((int)tst1 != (int)tst2 + 1 || cnt != (int) tst2)
     {
         cout << "operator++ Error" << endl;
         err_cnt++;
@@ -64,7 +65,7 @@ int main()
     // I do not know how to test automatically this function
     cout << "Check if operator>> works properly. Should be \"[Milo 234]\":" << endl;;
     stringstream is_test1;
-    is_test1 << "Milo" << " " << "234";
+    is_test1 << "[" << "Milo" << " " << "234" << "]";
     is_test1 >> tst1;
     cout << tst1 << endl << endl;
 
