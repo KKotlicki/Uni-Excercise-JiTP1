@@ -52,4 +52,5 @@ bld/
 [Ll]ogs/
 # Add this line
 out/
-idea/
+.idea/
+cmake-build-debug/

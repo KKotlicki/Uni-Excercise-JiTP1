@@ -31,7 +31,7 @@ public:
         return cnt++;
     }
 
-    bool operator<(const entry& rhf) const
+    operator<(const entry& rhf) const
     {
         return val < rhf.val;
     }
